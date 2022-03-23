@@ -1,0 +1,8 @@
+{
+  "name": "create-benji-react",
+  "version": "1.0.0",
+  "description": "Starter kit script for creating a React project based on Benji's template",
+  "author": "Benji Grant (https://bengrant.dev)",
+  "license": "MIT",
+  "bin": "index.js"
+}
