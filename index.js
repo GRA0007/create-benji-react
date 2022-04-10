@@ -4,13 +4,14 @@ const { execSync } = require('child_process')
 const TEMPLATE_REPO = 'https://github.com/GRA0007/benjis-react-template.git'
 
 // Passed in name of new project
-const name = process.argv[2]
+const path = process.argv[2] ?? '.'
+const name = path === '.' ? '$(basename "$PWD")' : path
 
 // Run a bash command
 const run = (cmd, showOutput = false, inFolder = true) => {
   try {
     execSync(cmd, {
-      cwd: inFolder ? `./${name}` : '.',
+      cwd: inFolder ? `./${path}` : '.',
       stdio: showOutput ? 'inherit' : 'pipe'
     })
   } catch (e) {
@@ -21,7 +22,7 @@ const run = (cmd, showOutput = false, inFolder = true) => {
 
 // Clone the repo
 console.log(`Making ${name} from the template...`)
-run(`git clone --depth 1 ${TEMPLATE_REPO} ${name}`, true, false)
+run(`git clone --depth 1 ${TEMPLATE_REPO} ${path}`, true, false)
 run(`rm -rf .git`)
 
 // Update package.json
